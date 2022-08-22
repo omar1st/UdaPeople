@@ -57,6 +57,9 @@ jobs:
             cd frontend
             npm install
             npm run test
+      - save_cache:
+          paths: [frontend/node_modules]
+          key: frontend-build
                       
   test-backend:
     docker:
@@ -71,6 +74,9 @@ jobs:
             cd backend
             npm install
             npm run test
+      - save_cache:
+          paths: [backend/node_modules]
+          key: backend-build
 
   scan-frontend:
     docker:
@@ -114,7 +120,7 @@ jobs:
               --tags project=your-tag \
               --stack-name "your back-end stack name with workflow id" \
               --parameter-overrides ID="udapeople-036912010688"  
-              exit 1
+              
       - run:
           name: Ensure front-end infrastructure exist
           command: |
@@ -123,12 +129,12 @@ jobs:
               --tags project=your-tag \
               --stack-name "your front-end stack name with workflow id" \
               --parameter-overrides ID="udapeople-036912010688"  
-              exit 1
+              
       - run:
           name: Add back-end ip to ansible inventory
           command: |
             apk add --update ansible
-            exit 1
+            
       - persist_to_workspace:
           root: ~/
           paths:
