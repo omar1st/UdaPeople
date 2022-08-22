@@ -63,20 +63,20 @@ jobs:
             npm install
             npm run test
 
-   scan-frontend:
-    docker:
-      - image: circleci/node:13.8.0
-    steps:
-      - checkout
-      - restore_cache:
-          keys: [fontend-build]
-      - run:
-          name: Build front-end
-          command: |
-            cd frontend
-            npm install
-            # npm install oauth-sign@^0.9.0
-            npm audit --audit-level=critical
+  scan-frontend:
+  docker:
+    - image: circleci/node:13.8.0
+  steps:
+    - checkout
+    - restore_cache:
+        keys: [fontend-build]
+    - run:
+        name: Build front-end
+        command: |
+          cd frontend
+          npm install
+          # npm install oauth-sign@^0.9.0
+          npm audit --audit-level=critical
 
   scan-backend:
     docker:
