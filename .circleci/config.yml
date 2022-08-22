@@ -14,9 +14,9 @@ jobs:
             cd frontend
             npm install
             npm run build
-      #- save_cache:
-          #paths: [frontend/node_modules]
-          #key: frontend-build
+      - save_cache:
+          paths: [frontend/node_modules]
+          key: frontend-build
 
   build-backend:
     docker:
@@ -31,9 +31,9 @@ jobs:
              cd backend
              npm install
              npm run build
-      #- save_cache:
-          #paths: [backend/node_modules]
-          #key: backend-build
+      - save_cache:
+          paths: [backend/node_modules]
+          key: backend-build
   
   test-frontend:
     docker:
@@ -48,9 +48,9 @@ jobs:
             cd frontend
             npm install
             npm run build
-      #- save_cache:
-       #   paths: [frontend/node_modules]
-        #  key: frontend-build
+      - save_cache:
+          paths: [frontend/node_modules]
+          key: frontend-build
                       
   test-backend:
     docker:
@@ -65,9 +65,9 @@ jobs:
             cd backend
             npm install
             npm run build
-      #- save_cache:
-          #paths: [backend/node_modules]
-          #key: backend-build
+      - save_cache:
+          paths: [backend/node_modules]
+          key: backend-build
 
 workflows:
   default:
