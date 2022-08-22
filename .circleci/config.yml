@@ -1,4 +1,13 @@
 version: 2.1
+
+commands:
+  destroy_environment:
+    steps:
+      - run:
+          name: Destroy environment 
+          when: on_fail
+          command: |
+            aws cloudformation delete-stack --stack-name myStack-${CIRCLE_WORKFLOW_ID:0:5}
          
 jobs:
   build-frontend:
@@ -90,6 +99,40 @@ jobs:
             cd backend
             npm install
             npm audit fix --audit-level=critical
+  
+   deploy-infrastructure:
+    docker:
+      image: amazon/aws-cli
+    steps:
+      - Checkout
+      - run: yum install -y tar gzip
+      - run:
+          name: Ensure back-end infrastructure exists
+          command: |
+            aws cloudformation deploy \
+            --template-file .circleci/files/backend.yml \
+            --tags project=your-tag \
+            --stack-name "your back-end stack name with workflow id" \
+            --parameter-overrides ID="udapeople-036912010688"  
+            exit 1
+      - run:
+          name: Ensure front-end infrastructure exist
+          command: |
+            aws cloudformation deploy \
+            --template-file .circleci/files/frontend.yml \
+            --tags project=your-tag \
+            --stack-name "your front-end stack name with workflow id" \
+            --parameter-overrides ID="udapeople-036912010688"  
+            exit 1
+      - run:
+          name: Add back-end ip to ansible inventory
+          command: |
+            apk add --update ansible
+            exit 1
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - project/.circleci/ansible/inventory.txt 
 
 workflows:
   default:
@@ -104,4 +147,9 @@ workflows:
           requires: [build-backend]
       - scan-frontend:
           requires: [build-frontend]
+      - deploy-infrastructure:
+          requires: [test-frontend, test-backend, scan-frontend, scan-backend]
+          filters:
+            branches:
+              only: [test-feature-branch]
   
