@@ -118,7 +118,7 @@ jobs:
             aws cloudformation deploy \
             --template-file .circleci/files/backend.yml \
             --tags project=your-tag \
-            --stack-name "udapeople-backend-/35b39f90-226c-11ed-ad09-12d64938263b" \
+            --stack-name "udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}" \
             --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}" 
       - run: exit 1
               
@@ -128,7 +128,7 @@ jobs:
             aws cloudformation deploy \
             --template-file .circleci/files/frontend.yml \
             --tags project=your-tag \
-            --stack-name "udapeople-frontend-/fca95460-227f-11ed-850c-0e077bd5ea09" \
+            --stack-name "udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7}" \
             --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}" 
       - run: exit 1
 
