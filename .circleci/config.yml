@@ -119,7 +119,7 @@ jobs:
             --template-file .circleci/files/backend.yml \
             --tags project=your-tag \
             --stack-name "your back-end stack name with workflow id" \
-            --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}" 
+            --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:5}" 
             --region us-east-1
       - run: exit 1
               
@@ -130,7 +130,7 @@ jobs:
             --template-file .circleci/files/frontend.yml \
             --tags project=your-tag \
             --stack-name "your front-end stack name with workflow id" \
-            --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}" 
+            --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:5}" 
             --region us-east-1
       - run: exit 1
 
