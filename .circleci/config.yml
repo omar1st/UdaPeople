@@ -117,7 +117,7 @@ jobs:
           command: |
             aws cloudformation deploy \
             --template-file .circleci/files/backend.yml \
-            --stack-name "udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}" \
+            --stack-name "udapeople-backend-3021490" \
             --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}" \
             --tags project=udapeople
            
@@ -127,7 +127,7 @@ jobs:
           command: |
             aws cloudformation deploy \
             --template-file .circleci/files/frontend.yml \
-            --stack-name "udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7}" \
+            --stack-name "udapeople-frontend-3021490" \
             --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}" \
             --tags project=udapeople
       
@@ -135,9 +135,13 @@ jobs:
           name: Add back-end ip to ansible inventory
           command: |
             aws ec2 describe-instances \
-            --query 'Reservations[*].Instances[*].PublicIpAddress' \
+            --query'Reservations[*].Instances[*].PublicIpAddress' \
             --filters "Name=tag:udapeople,Values=udapepole" \
             --output text >> inventory
+      
+      - run: return 1
+      - destroy_environment
+
 
 workflows:
   default:
