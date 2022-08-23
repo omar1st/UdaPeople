@@ -139,7 +139,7 @@ jobs:
               --filters "Name=tag:udapeople,Values=udapepole" \
               --output text >> inventory
       
-          when: on_fail
+            - on_fail
             - destroy_environment
 
 
