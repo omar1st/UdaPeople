@@ -8,6 +8,7 @@ commands:
           when: on_fail
           command: |
             aws cloudformation delete-stack --stack-name myStack-${CIRCLE_WORKFLOW_ID:0:7}
+            exit 1
          
 jobs:
   build-frontend:
@@ -120,6 +121,7 @@ jobs:
               --stack-name "udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}" \
               --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}" \
               --tags project=udapeople
+              exit 1
             
               
       - run:
@@ -130,6 +132,7 @@ jobs:
               --stack-name "udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}" \
               --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}" \
               --tags project=udapeople
+              exit 1
       
       - run:
           name: Add back-end ip to ansible inventory
@@ -138,12 +141,12 @@ jobs:
               --query 'Reservations[*].Instances[*].PublicIpAddress' \
               --filters "Name=tag:Name,Values=udapepole" \
               --output text >> inventory
+              exit 1
       - persist_to_workspace:
         root: ~/
         paths:
           - UdaPeople/.circleci/ansible/inventory.txt            
-
-      -run: exit1
+      
       - destroy_environment
 
 workflows:
