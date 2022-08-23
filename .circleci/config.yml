@@ -110,9 +110,6 @@ jobs:
     docker:
       - image: amazon/aws-cli
     steps:
-      - Checkout
-      - restore_cache:
-          keys: [infrastracture-build]
       - run: yum install -y tar gzip
       - run:
           name: Ensure back-end infrastructure exists
