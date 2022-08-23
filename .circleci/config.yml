@@ -136,10 +136,12 @@ jobs:
           command: |
             touch .circleci/ansible/inventory.txt
             echo [web] > .circleci/ansible/inventory.txt
-            backend_publicip_address=ws ec2 describe-instances \
+            BACKEND_PUPLICIP_ADDRESS=$( aws ec2 describe-instances \
             --query'Reservations[*].Instances[*].PublicIpAddress' \
-            --filters "Name=tag:Name,udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}" \
-            --output text >> inventory
+            --filters "Name=tag:Name,backend-${CIRCLE_WORKFLOW_ID:0:7}" \
+            --region us-east-1 --output text)
+            echo $BACKEND_PUPLICIP_ADDRESS >> .circleci/ansible/inventory.txt
+            cat .circleci/ansible/inventory.txt
       - persist_to_workspace:
           root: ~/
           paths:
