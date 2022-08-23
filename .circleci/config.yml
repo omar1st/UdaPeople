@@ -138,11 +138,6 @@ jobs:
             --query 'Reservations[*].Instances[*].PublicIpAddress' \
             --filters "Name=tag:udapeople,Values=udapepole" \
             --output text >> inventory
-      - persist_to_workspace:
-          root: ~/
-          paths:
-            - .circleci/ansible/inventory.txt
-      # Here's where you will add some code to rollback on failure
 
 workflows:
   default:
