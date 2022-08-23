@@ -141,9 +141,7 @@ jobs:
               --filters "Name=tag:Name,Values=udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}" \
               --output text)
               echo $BACKEND_PUBLICIP_ADDRESS >> .circleci/ansible/inventory.txt
-              cat .circleci/ansible/inventory.txt           
-
-      #- destroy_environment
+              cat .circleci/ansible/inventory.txt 
 
 workflows:
   default:
