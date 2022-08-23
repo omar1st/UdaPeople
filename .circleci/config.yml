@@ -144,7 +144,7 @@ jobs:
               cat .circleci/ansible/inventory.txt
       
       - persist_to_workspace:
-        root: root
+        ubuntu: ~/ 
         paths:
           - udapeople/.circleci/ansible/inventory.txt           
 
