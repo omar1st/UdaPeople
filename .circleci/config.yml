@@ -138,12 +138,13 @@ jobs:
               --query 'Reservations[*].Instances[*].PublicIpAddress' \
               --filters "Name=tag:Name,Values=udapepole" \
               --output text >> inventory
-       
-       - persist_to_workspace:
-          root: ~/
-          paths:
-            - UdaPeople/.circleci/ansible/inventory.txt            
+      - persist_to_workspace:
+        root: ~/
+        paths:
+          - UdaPeople/.circleci/ansible/inventory.txt            
 
+      -run: exit1
+      - destroy_environment
 
 workflows:
   default:
