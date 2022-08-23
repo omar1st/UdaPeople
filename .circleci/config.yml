@@ -142,10 +142,10 @@ jobs:
               --output text)
               echo $BACKEND_PUBLICIP_ADDRESS >> .circleci/ansible/inventory.txt
               cat .circleci/ansible/inventory.txt
-      #- persist_to_workspace: udapeople
-        #root: ~/
-        #paths:
-         # - udapeople/.circleci/ansible/inventory.txt           
+      - persist_to_workspace:
+        root: ~/
+        paths:
+          - .circleci/ansible/inventory.txt           
 
       #- destroy_environment
 
