@@ -119,7 +119,8 @@ jobs:
               --template-file .circleci/files/backend.yml \
               --tags project=your-tag \
               --stack-name "your back-end stack name with workflow id" \
-              --parameter-overrides ID="udapeople-036912010688"  
+              --parameter-overrides ID="udapeople-036912010688" 
+      - run: exit 1
               
       - run:
           name: Ensure front-end infrastructure exist
@@ -129,17 +130,19 @@ jobs:
               --tags project=your-tag \
               --stack-name "your front-end stack name with workflow id" \
               --parameter-overrides ID="udapeople-036912010688"  
-              
+      - run: exit 1
+
       - run:
           name: Add back-end ip to ansible inventory
           command: |
             apk add --update ansible
+      - run: exit 1
             
       - persist_to_workspace:
           root: ~/
           paths:
             - project/.circleci/ansible/inventory.txt 
-            - destroy_environment
+      - destroy_environment
 
 workflows:
   default:
