@@ -143,9 +143,9 @@ jobs:
               echo $BACKEND_PUBLICIP_ADDRESS >> .circleci/ansible/inventory.txt
               cat .circleci/ansible/inventory.txt
       - persist_to_workspace:
-        root: /tmp/dir
+        root: ~/
         paths:
-          - .circleci/ansible/inventory.txt           
+          - project/.circleci/ansible/inventory.txt           
 
       #- destroy_environment
 
