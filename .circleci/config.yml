@@ -119,8 +119,7 @@ jobs:
             --template-file .circleci/files/backend.yml \
             --tags project=your-tag \
             --stack-name "your back-end stack name with workflow id" \
-            --parameter-overrides ID="udapeople-036912010688"
-            --region us-east-1 
+            --parameter-overrides ID="udapeople-036912010688" 
       - run: exit 1
               
       - run:
@@ -131,7 +130,6 @@ jobs:
             --tags project=your-tag \
             --stack-name "your front-end stack name with workflow id" \
             --parameter-overrides ID="udapeople-036912010688" 
-            --region us-east-1 
       - run: exit 1
 
       - run:
