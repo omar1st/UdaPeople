@@ -121,6 +121,7 @@ jobs:
             --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}" \
             --tags project=udapeople \
             --region us-east-1
+      - run: exit1
               
       - run:
           name: Ensure front-end infrastructure exist
@@ -131,6 +132,7 @@ jobs:
             --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}" \
             --tags project=udapeople \
             --region us-east-1
+      - run: exit1
             
       - persist_to_workspace:
           root: ~/
