@@ -108,6 +108,7 @@ jobs:
       - run: 
           name: install requirments
           command:
+            yum update -y
             yum install -y tar gzip
       - run:
           name: Ensure back-end infrastructure exists
