@@ -123,23 +123,6 @@ jobs:
               --stack-name "udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7}" \
               --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}" \
               --tags project=udapeople
-      
-      - run:
-          name: Add back-end ip to ansible inventory
-          command: |
-              touch .circleci/ansible/inventory.txt
-              echo [web] > .circleci/ansible/inventory.txt
-              BACKEND_PUBLICIP_ADDRESS=$(aws ec2 describe-instances \
-              --query 'Reservations[*].Instances[*].PublicIpAddress' \
-              --filters "Name=tag:Name,Values=udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}" \
-              --output text)
-              echo $BACKEND_PUBLICIP_ADDRESS >> .circleci/ansible/inventory.txt
-              cat .circleci/ansible/inventory.txt
-
-      - persist_to_workspace:
-          root: ~/
-          paths:
-            - project/.circleci/ansible/inventory.txt
 
 workflows:
   default:
