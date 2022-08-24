@@ -135,7 +135,7 @@ jobs:
       - persist_to_workspace:
           root: ~/
           paths:
-            - udapeople/.circleci/ansible/inventory.txt
+            - project/.circleci/ansible/inventory.txt
 
 workflows:
   default:
