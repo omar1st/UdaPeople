@@ -152,8 +152,7 @@ jobs:
           paths:
             - project/.circleci/ansible/inventory.txt
           
-          command: |
-      - return 1
+          command: return 1
       - destroy_environment  
         
 
