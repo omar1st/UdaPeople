@@ -135,6 +135,7 @@ jobs:
               --stack-name udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7} \
               --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}"  
               exit 1
+      
       - run:
           name: Add back-end ip to ansible inventory
           command: |
@@ -143,17 +144,10 @@ jobs:
               --filters "Name=tag:project,Values=udapeople" \
               --output text >> .circleci/ansible/inventory.txt
             exit 1
-
       - persist_to_workspace:
           root: ~/
           paths:
             - project/.circleci/ansible/inventory.txt
-      
-      - checkout
-      -run:
-         name:
-         command: |
-           exit 1
       - destroy_environment
 
 workflows:
