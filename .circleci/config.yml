@@ -149,6 +149,7 @@ jobs:
           paths:
             - project/.circleci/ansible/inventory.txt
       
+      - checkout
       -run:
          name:
          command: |
