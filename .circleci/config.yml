@@ -110,23 +110,25 @@ jobs:
           command:
             yum update -y
             yum install -y tar gzip
+    
       - run:
           name: Ensure back-end infrastructure exists
           command: |
             aws cloudformation deploy \
               --template-file .circleci/files/backend.yml \
-              --stack-name "udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}" \
-              --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}" \
-              --tags project=udapeople
-            
+              --tags project=udapeople \
+              --"udapeople-backend-b2e40df" \
+              --parameter-overrides ID="b2e40df"  
+              exit 1
       - run:
           name: Ensure front-end infrastructure exist
           command: |
             aws cloudformation deploy \
               --template-file .circleci/files/frontend.yml \
-              --stack-name "udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7}" \
-              --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}" \
-              --tags project=udapeople
+              --tags project=udapeople \
+              --stack-name "udapeople-frontend-b2e40df" \
+              --parameter-overrides ID="b2e40df"  
+              exit 1
 
 workflows:
   default:
