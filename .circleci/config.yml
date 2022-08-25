@@ -152,7 +152,8 @@ jobs:
       -run:
          name:
          command: |
-          - destroy_environment
+           exit 1
+      - destroy_environment
 
 workflows:
   default:
