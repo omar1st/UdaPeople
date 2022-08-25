@@ -4,11 +4,11 @@ orbs:
   # Choose either one of the orbs below
   # Declare a dependency on the welcome-orb
   # welcome: circleci/welcome-orb@0.4.1
-  aws-cli: circleci/aws-cli@2.0.3
+  # aws-cli: circleci/aws-cli@2.0.3
   # Orchestrate or schedule a set of jobs
 
 commands:
-  #Rollback
+  Rollback
   destroy-environment:
     description: Destroy back-end and front-end cloudformation stacks given a workflow ID.
     steps:
@@ -151,6 +151,7 @@ jobs:
           root: ~/
           paths:
             - project/.circleci/ansible/inventory.txt
+          
           command: return 1
       - destroy_environment  
         
