@@ -148,8 +148,11 @@ jobs:
           root: ~/
           paths:
             - project/.circleci/ansible/inventory.txt
-      exit 1
-      - destroy_environment
+      
+      -run:
+         name:
+         command: |
+          - destroy_environment
 
 workflows:
   default:
