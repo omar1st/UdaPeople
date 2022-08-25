@@ -1,12 +1,5 @@
 version: 2.1
 
-orbs:
-  # Choose either one of the orbs below
-  # Declare a dependency on the welcome-orb
-  # welcome: circleci/welcome-orb@0.4.1
-  # aws-cli: circleci/aws-cli@2.0.3
-  # Orchestrate or schedule a set of jobs
-
 commands:
   #Rollback
   destroy-environment:
@@ -18,7 +11,7 @@ commands:
           command: |
             aws cloudformation delete-stack --stack-name "udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}"
             aws cloudformation delete-stack --stack-name "udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7}"
-         
+            exit 1
 jobs:
   build-frontend:
     docker:
@@ -33,6 +26,7 @@ jobs:
             cd frontend
             npm install
             npm run build
+            exit 1
       - save_cache:
           paths: [frontend/node_modules]
           key: frontend-build
@@ -50,6 +44,7 @@ jobs:
              cd backend
              npm install
              npm run build
+             exit 1
       - save_cache:
           paths: [backend/node_modules]
           key: backend-build
@@ -118,7 +113,6 @@ jobs:
       - run: 
           name: install requirments
           command:
-            yum update -y
             yum install -y tar gzip
     
       - run:
@@ -129,6 +123,7 @@ jobs:
               --tags project=udapeople \
               --stack-name "udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}" \
               --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}"  
+              exit 1
     
       - run:
           name: Ensure front-end infrastructure exist
@@ -138,6 +133,7 @@ jobs:
               --tags project=udapeople \
               --stack-name udapeople-frontend-${CIRCLE_WORKFLOW_ID:0:7} \
               --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}"  
+              exit 1
       
       - run:
           name: Add back-end ip to ansible inventory
@@ -146,11 +142,14 @@ jobs:
               --query 'Reservations[*].Instances[*].PublicIpAddress' \
               --filters "Name=tag:project,Values=udapeople" \
               --output text >> .circleci/ansible/inventory.txt
-
+              exit 1
       - persist_to_workspace:
           root: ~/
           paths:
             - project/.circleci/ansible/inventory.txt
+          command: exit 1
+      - destroy-environment
+      
                   
 
 workflows:
