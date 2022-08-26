@@ -143,8 +143,8 @@ jobs:
           root: ~/
           paths:
             - project/.circleci/ansible/inventory.txt
-          command: exit 1
-      - destroy-environment
+          #command: exit 1
+      #- destroy-environment
       
                   
 
