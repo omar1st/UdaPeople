@@ -138,7 +138,7 @@ jobs:
             cat inventory.txt
             aws ec2 describe-instances \
             --query 'Reservations[*].Instances[*].PublicIpAddress' \
-            --output text --filters "Name=tag:project,Values=udapeople" inventory.txt
+            --output text --filters Name=tag:project,Values=udapeople >> inventory.txt
             cat inventory.txt
               
       - persist_to_workspace:
