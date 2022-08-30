@@ -150,7 +150,6 @@ jobs:
   
   configure-infrastructure: 
     docker:
-      - image: amazon/aws-cli
       - image: python:3.7-alpine3.11
     steps:
       - checkout
@@ -162,7 +161,6 @@ jobs:
           name: Install dependencies
           command: |
             # install the dependencies needed for your playbook
-            yum install -y tar gzip
             apk add --update ansible 
       - run:
           name: Configure server
