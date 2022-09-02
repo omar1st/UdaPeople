@@ -209,11 +209,12 @@ jobs:
       - run:
           name: Install Python
           command: |
-            yum install python37
+            yum install python38
+            yum load-transaction /tmp/yum_save_tx.2022-09-02.22-55.wRHut2.yumtx
       - run:
           name: Install ansible
           command: |
-            apk add --update ansible
+            yum add --update ansible
       - run:
           name: Install Node
           command: |
