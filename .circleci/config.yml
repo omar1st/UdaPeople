@@ -207,15 +207,17 @@ jobs:
       - run:
           name: Install Python
           command: |
-            python install
+            yum install -y python:3.7
       - run:
-          name: Install Python
+          name: Install ansible
           command: |
-            ansible install
+            yum install -y ansible
       - run:
           name: Install Node
           command: |
-            node install 
+            cd frontend
+            npm install
+            npm run build
       - run:
           name: Get backend url
           command: |
