@@ -209,12 +209,11 @@ jobs:
       - run:
           name: Install Python
           command: |
-            python -m pip install --upgrade pip
-            pip install -q ansible
-      #- run:
-          #name: Install ansible
-          #command: |
-            #apk add --update ansible
+            yum install python37
+      - run:
+          name: Install ansible
+          command: |
+            apk add --update ansible
       - run:
           name: Install Node
           command: |
