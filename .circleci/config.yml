@@ -197,7 +197,7 @@ jobs:
     docker:
       - image: amazon/aws-cli
     steps:
-      - Checkout
+      #- Checkout
       - run: 
           name: install requirments
           command:
