@@ -207,7 +207,7 @@ jobs:
       - run:
           name: Install Python
           command: |
-            yum instal python:3.7-alpine3.11
+            yum install -y python:3.7-alpine3.11
       - run:
           name: Install ansible
           command: |
