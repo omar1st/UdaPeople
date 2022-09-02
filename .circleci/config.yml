@@ -196,6 +196,7 @@ jobs:
   deploy-frontend:
     docker:
       - image: amazon/aws-cli
+      - image: python:3.7-alpine3.11
     steps:
       #- Checkout
       - run: 
@@ -204,10 +205,10 @@ jobs:
             yum install -y tar gzip
       - attach_workspace:
           at: ~/
-      - run:
-          name: Install Python
-          command: |
-            yum install -y python:3.7-alpine3.11
+      #- run:
+          #name: Install Python
+          #command: |
+            #yum install -y python:3.7-alpine3.11
       - run:
           name: Install ansible
           command: |
