@@ -208,6 +208,11 @@ jobs:
           name: Install Python
           command: |
             yum install -y python37
+      - run:
+          name: build frontend
+          command:
+            cd frontend
+            npm install
       - attach_workspace:
           at: ~/
       - run:
