@@ -197,6 +197,7 @@ jobs:
   deploy-frontend:
     docker:
       - image: amazon/aws-cli
+      - image: circleci/node:13.8.0
     steps:
       - run: 
           name: install requirments
@@ -206,13 +207,12 @@ jobs:
           name: Install Python
           command: |
             yum install -y python37
-      - restore_cache:
-          keys: [frontend-build]
       - run:
           name: Build front-end
           command: |
             cd frontend
             npm install
+            npm run build
       - attach_workspace:
           at: ~/
       - run:
