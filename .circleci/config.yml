@@ -198,20 +198,7 @@ jobs:
     docker:
       - image: circleci/node:13.8.0
     steps:
-      - run: 
-          name: install requirments
-          command:
-            yum install -y tar gzip
-      - run:
-          name: Install Python
-          command: |
-            yum install -y python37
-      - run:
-          name: Build front-end
-          command: |
-            cd frontend
-            npm install
-            npm run build
+      - checkout
       - attach_workspace:
           at: ~/
       - run:
