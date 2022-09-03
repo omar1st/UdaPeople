@@ -206,10 +206,10 @@ jobs:
           name: Install Python
           command: |
             yum install -y python37
-      #- run:
-          #name: install node & npm
-          #command:
-           # yum install -y node npm
+      - run:
+          name: install node & npm
+          command:
+            yum install nodejs npm --enablerepo=epel
       - attach_workspace:
           at: ~/
       - run:
