@@ -207,8 +207,8 @@ jobs:
       - run:
           name: Install Python
           command: |
-            yum install -y python:37-alpine3
-            apk add --update ansible
+            yum install -y python:37
+  
       - run:
           name: Install Node
           command: |
