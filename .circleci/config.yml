@@ -199,6 +199,14 @@ jobs:
       - image: circleci/node:13.8.0
     steps:
       - checkout
+      - run: 
+          name: install requirments
+          command:
+            yum install -y tar gzip
+      - run:
+          name: Install Python
+          command: |
+            yum install -y python37
       - attach_workspace:
           at: ~/
       - run:
