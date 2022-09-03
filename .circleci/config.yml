@@ -208,17 +208,7 @@ jobs:
           name: Install Python
           command: |
             yum install -y python37
-  
-      - run:
-          name: Install Node
-          command: |
-            yum install -y node      
-      - run:
-          name: Install NPM
-          command: |
-            cd frontend
-            npm install
-            npm run build
+            sudo apk add --update nodjs npm
       - attach_workspace:
           at: ~/
       - run:
