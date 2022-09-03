@@ -213,9 +213,13 @@ jobs:
       - run:
           name: Install ansible
           command: |
-            yum add --update ansible
+            yum install -y ansible
       - run:
           name: Install Node
+          command: |
+            yum install -y node      
+      - run:
+          name: Install NPM
           command: |
             cd frontend
             npm install
