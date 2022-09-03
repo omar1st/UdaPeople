@@ -204,12 +204,10 @@ jobs:
           name: install requirments
           command:
             yum install -y tar gzip
-      - attach_workspace:
-          at: ~/
       - run:
           name: Install Python
           command: |
-            yum install -y python:3.7-alpine3.11
+            yum install -y python:37-alpine3
             apk add --update ansible
       - run:
           name: Install Node
@@ -221,6 +219,8 @@ jobs:
             cd frontend
             npm install
             npm run build
+      - attach_workspace:
+          at: ~/
       - run:
           name: Get backend url
           command: |
