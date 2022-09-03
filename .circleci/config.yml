@@ -209,7 +209,7 @@ jobs:
       - run:
           name: install node & npm
           command:
-            yum install nodejs npm --enablerepo=epel
+            yum install nodejs npm
       - attach_workspace:
           at: ~/
       - run:
