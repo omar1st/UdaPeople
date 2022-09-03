@@ -208,7 +208,7 @@ jobs:
           name: Install Python
           command: |
             yum install -y python37
-            apk add --update nodjs npm
+            yum add --update -y nodjs npm
       - attach_workspace:
           at: ~/
       - run:
