@@ -199,7 +199,7 @@ jobs:
       #- image: amazon/aws-cli
       - image: circleci/node:13.8.0
     steps:
-      #- checkout
+      - checkout
       - run:
           name: Install dependencies
           command: |
@@ -208,18 +208,6 @@ jobs:
             unzip -qq awscliv2.zip
             sudo ./aws/install
             sudo apt install -y ansible
-      #- run: 
-          #name: install requirments
-          #command:
-            #yum install -y tar gzip
-      #- run:
-          #name: Install Python
-          #command: |
-            #yum install -y python37
-      #- run:
-          #name: install node & npm
-          #command:
-            #sudo yum nodejs npm install
       - attach_workspace:
           at: ~/
       - run:
