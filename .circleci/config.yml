@@ -197,7 +197,7 @@ jobs:
   deploy-frontend:
     docker:
       #- image: amazon/aws-cli
-      - image: python:3.7-alpine3.11
+      - image: circleci/node:13.8.0
     steps:
       #- checkout
       - run:
@@ -207,7 +207,11 @@ jobs:
             curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
             unzip -qq awscliv2.zip
             sudo ./aws/install
-            apk add --update ansible
+      - run:
+          name: Ansible
+          command: |
+            # install the dependencies needed for your playbook
+            apk add --update ansible 
       #- run: 
           #name: install requirments
           #command:
