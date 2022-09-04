@@ -211,7 +211,7 @@ jobs:
           name: Ansible
           command: |
             # install the dependencies needed for your playbook
-            apk add --update ansible 
+            sudo add --update ansible 
       #- run: 
           #name: install requirments
           #command:
