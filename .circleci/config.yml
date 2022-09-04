@@ -196,20 +196,30 @@ jobs:
 
   deploy-frontend:
     docker:
-      - image: amazon/aws-cli
+      #- image: amazon/aws-cli
+      - image: python:3.7-alpine3.11
     steps:
-      - run: 
-          name: install requirments
-          command:
-            yum install -y tar gzip
+      #- checkout
       - run:
-          name: Install Python
+          name: Install dependencies
           command: |
-            yum install -y python37
-      - run:
-          name: install node & npm
-          command:
-            yum install nodejs npm
+            sudo apt install -y tar gzip curl
+            curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+            unzip -qq awscliv2.zip
+            sudo ./aws/install
+            apk add --update ansible
+      #- run: 
+          #name: install requirments
+          #command:
+            #yum install -y tar gzip
+      #- run:
+          #name: Install Python
+          #command: |
+            #yum install -y python37
+      #- run:
+          #name: install node & npm
+          #command:
+            #sudo yum nodejs npm install
       - attach_workspace:
           at: ~/
       - run:
