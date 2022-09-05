@@ -227,6 +227,7 @@ jobs:
             npm run build
             tar -czvf artifact-"${CIRCLE_WORKFLOW_ID:0:7}".tar.gz dist
             aws s3 cp dist s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive
+            URL="https://api.memstash.io/values/migration_${CIRCLE_WORKFLOW_ID:0:7}"
             if curl -s --head ${URL} 
             then
               return 0
