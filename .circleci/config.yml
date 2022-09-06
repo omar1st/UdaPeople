@@ -195,18 +195,16 @@ jobs:
 
   deploy-frontend:
     docker:
-      #- image: amazon/aws-cli
-      - image: circleci/node:13.8.0
+      - image: amazon/aws-cli
+      #- image: circleci/node:13.8.0
     steps:
       - checkout
       - run:
           name: Install dependencies
           command: |
-            sudo apt install -y tar gzip curl
-            curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-            unzip -qq awscliv2.zip
-            sudo ./aws/install
-            sudo apt install -y ansible
+            yum install -y tar gzip curl
+            yum install -y ansible
+            yum npm -y install
       - attach_workspace:
           at: ~/
       - run:
@@ -227,14 +225,6 @@ jobs:
             npm run build
             tar -czvf artifact-"${CIRCLE_WORKFLOW_ID:0:7}".tar.gz dist
             aws s3 cp dist s3://udapeople-${CIRCLE_WORKFLOW_ID:0:7} --recursive
-            URL="https://api.memstash.io/values/migration_${CIRCLE_WORKFLOW_ID:0:7}"
-            if curl -s --head ${URL} 
-            then
-              return 0
-            else
-              return 1
-            fi
-      - destroy-environment
 
 workflows:
   default:

@@ -1,9 +1,0 @@
-aws cloudformation deploy --template-file cloudfront.yml --stack-name InitialStack --parameter-overrides WorkflowID=udapeople-036912010688
-
-aws ec2 describe-instances --query 'Reservations[*].Instances[*].PublicIpAddress' --filters "Name=tag:Project,Values=udapeople" --output text >> .circleci/ansible/inventory.txt
-
-
-touch .circleci/ansible/inventory.txt 
-echo [web] > .circleci/ansible/inventory.txt 
-BACKEND_PUBLICIP_ADDRESS=$(aws ec2 describe-instances --query 'Reservations[*].Instances[*].PublicIpAddress' --filters "Name=tag:project,Values=udapeople-backend-${CIRCLE_WORKFLOW_ID:0:7}" --output text >> .circleci/ansible/inventory.txt) echo $BACKEND_PUBLICIP_ADDRESS >> .circleci/ansible/inventory.txt
-cat .circleci/ansible/inventory.txt
