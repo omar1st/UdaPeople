@@ -238,7 +238,7 @@ jobs:
           name: Install dependencies
           command: |
             apk add --update ansible
-            apk add --update nodejs
+            apk add --update npm
       - attach_workspace:
           at: ~/
       - run:
