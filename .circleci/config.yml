@@ -228,18 +228,21 @@ jobs:
   
   deploy-backend:
     docker:
-      - image: python:3.7-alpine3.11
+      #- image: python:3.7-alpine3.11
+      - image: circleci/node:13.8.0
     steps:
       - checkout
       - add_ssh_keys:
           fingerprints: ["e3:81:1b:cf:41:80:0b:67:6c:96:56:9e:f7:66:5b:79"]
-      - attach_workspace:
-          at: ~/
       - run:
           name: Install dependencies
           command: |
-            # install the dependencies needed for your playbook
-            apk add --update ansible
+            sudo apt install -y tar gzip curl
+            curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+            unzip -qq awscliv2.zip
+            sudo ./aws/install
+      - attach_workspace:
+          at: ~/
       - run:
           name: Back-end build
           command: |
