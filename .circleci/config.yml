@@ -241,6 +241,12 @@ jobs:
             # install the dependencies needed for your playbook
             apk add --update ansible
       - run:
+          name: Back-end build
+          command: |
+             cd backend
+             npm install
+             npm run build
+      - run:
           name: Deploy backend
           command: |
             cd backend
