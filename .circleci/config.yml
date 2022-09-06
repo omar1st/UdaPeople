@@ -244,7 +244,8 @@ jobs:
           name: Install Tar & Ansible
           command: |
             sudo apt install -y tar gzip curl
-            curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip"
+            curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+            unzip -qq awscliv2.zip
             sudo ./aws/install
             sudo apt install -y ansible
       - run:
