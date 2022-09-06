@@ -264,7 +264,6 @@ jobs:
 
   smoke-test:
     docker:
-      docker:
       - image: alpine:latest
     steps:
       - run: apk add --update curl
