@@ -277,8 +277,9 @@ jobs:
           name: Get backend url
           command: |
             # Fetch and prepare the BACKEND_IP env var
-            export API_URL="http://${BACKEND_IP}:3030"
-            echo "${API_URL}"
+            aws ec2 describe-instances \
+            --query 'Reservations[*].Instances[*].PublicIpAddress' \
+            --output text --filters Name=tag:project,Values=udapeople >> inventory.txt
       - run:
           name: Backend smoke test.
           command: |
