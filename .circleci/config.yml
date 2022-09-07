@@ -145,8 +145,6 @@ jobs:
           root: ~/
           paths:
             - project/.circleci/ansible/inventory.txt
-          #command: exit 1
-      #- destroy-environment
   
   configure-infrastructure: 
     docker:
@@ -229,7 +227,6 @@ jobs:
   deploy-backend:
     docker:
       - image: python:3.7-alpine3.11
-      #- image: circleci/node:13.8.0
     steps:
       - checkout
       - add_ssh_keys:
