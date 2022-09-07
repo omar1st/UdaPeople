@@ -280,7 +280,6 @@ jobs:
               export API_URL="http://${BACKEND_IP}:3030"
               echo "API_URL = ${API_URL}"
               echo API_URL="http://${BACKEND_IP}:3030" >> backend/.env
-              cat backend/.env
       - run:
           name: Backend smoke test.
           command: |
