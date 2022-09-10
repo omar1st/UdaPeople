@@ -1,6 +1,6 @@
 version: 2.1
 
-commands:
+command:
   destroy-environment:
   #description: Destroy backend and frontend cloudformation stacks given a workflow ID.
   parameters:
@@ -13,7 +13,7 @@ commands:
         command: |
           echo "Destroying environment: << parameters.workflow_id >> "
 
-commands:
+command:
   revert-migrations:
   #description: Revert the last migration
   parameters:
