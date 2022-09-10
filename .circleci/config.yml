@@ -11,7 +11,7 @@ commands:
   destroy-environment:
     description: Destroy backend and frontend cloudformation stacks given a workflow ID.
     parameters:
-      workflow_id:
+      workflow_id: aws cloudformation delete-stack --stack-name myStack-${CIRCLE_WORKFLOW_ID:0:7}
         type: string
     steps:
       - run:
@@ -338,6 +338,7 @@ jobs:
             else
               return 1
             fi
+      
       - destroy-environment
       - revert-migrations
 
