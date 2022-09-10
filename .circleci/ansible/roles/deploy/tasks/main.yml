@@ -21,7 +21,6 @@
     npm install
 
 - name:  start app
- # command:  pm2 start main.js
   shell: |
     npm install
     pm2 stop default
