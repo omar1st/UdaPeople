@@ -1,5 +1,12 @@
 version: 2.1
 
+orbs:
+  # Choose either one of the orbs below
+  # Declare a dependency on the welcome-orb
+  # welcome: circleci/welcome-orb@0.4.1
+  # aws-cli: circleci/aws-cli@2.0.3
+  # Orchestrate or schedule a set of jobs
+
 commands:
   destroy-environment:
   description: Destroy backend and frontend cloudformation stacks given a workflow ID.
@@ -15,7 +22,7 @@ commands:
 
   revert-migrations:
   #description: Revert the last migration
-  parameters:
+  #parameters:
     workflow_id:
       type: string
   steps:
