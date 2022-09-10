@@ -13,7 +13,6 @@ commands:
         command: |
           echo "Destroying environment: << parameters.workflow_id >> "
 
-commands:
   revert-migrations:
   description: Revert the last migration
   parameters:
