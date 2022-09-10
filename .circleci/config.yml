@@ -1,6 +1,6 @@
 version: 2.1
 
-command:
+commands:
   destroy-environment:
   description: Destroy backend and frontend cloudformation stacks given a workflow ID.
   parameters:
