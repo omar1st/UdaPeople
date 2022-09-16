@@ -348,7 +348,7 @@ jobs:
               return 1
             fi
       - destroy-environment
-      - revert-migrations
+      - revert-migrations_<< parameters.Workflow_ID >>
 
   cloudfront-update:
     docker:
