@@ -387,7 +387,7 @@ jobs:
               --tags project=udapeople
             echo OldWorkflowID: "${OldWorkflowID}"
             echo CIRCLE_WORKFLOW_ID "${CIRCLE_WORKFLOW_ID:0:7}"
-            if [[ "${STACKS[@]}" !="${OldWorkflowID}" ]]
+            if [[ "${STACKS[@]}" =~ "${OldWorkflowID}" ]]
             then
               echo "------------------ Deleted ----------------"
               aws s3 rm s3://udapeople-${OldWorkflowID} --recursive
