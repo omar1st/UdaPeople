@@ -29,7 +29,7 @@ commands:
     parameters:
         workflow_id:
           type: string
-          default: ${CIRCLE_WORKFLOW_ID:0:7}
+          default:
     steps:
       - run:
           name: Revert migrations
@@ -316,25 +316,31 @@ jobs:
           command: |
             export BACKEND_IP=$(aws ec2 describe-instances \
             --query 'Reservations[*].Instances[*].PublicIpAddress' \
-            --output text)
+            --output text) >> frontend/.env
             export API_URL="http://${BACKEND_IP}:3030"
             echo "API_URL = ${API_URL}"
-            echo API_URL="http://${BACKEND_IP}:3030" 
-      - run:
-          name: Backend smoke test.
-          command: |
-              # Fetch and prepare the BACKEND_IP env var
-              # export BACKEND_IP=$(aws ec2 describe-instances \
-              # --query 'Reservations[*].Instances[*].PublicIpAddress' \
-              # --output text)
-              export API_URL="http://${BACKEND_IP}:3030"
-              echo "${API_URL}"
-              if curl "${API_URL}/api/status" | grep "ok"
+            echo API_URL="http://${BACKEND_IP}:3030"
+            if curl "${API_URL}/api/status" | grep "ok"
               then
                   return 0
               else
                   return 1
               fi
+      #- run:
+          #name: Backend smoke test.
+          #command: |
+              # Fetch and prepare the BACKEND_IP env var
+              #export BACKEND_IP=$(aws ec2 describe-instances \
+              #--query 'Reservations[*].Instances[*].PublicIpAddress' \
+              #--output text)
+              #export API_URL="http://${BACKEND_IP}:3030"
+              #echo "${API_URL}"
+              #if curl "${API_URL}/api/status" | grep "ok"
+              #then
+                  #return 0
+              #else
+                  #return 1
+              #fi
       - run:
           name: Frontend smoke test.
           command: |
@@ -394,7 +400,7 @@ jobs:
       - run:
           name: Remove old stacks and files
           command: |
-            if [[ "${STACKS[@]}" =~ "${OldWorkflowID}" ]]
+            if [[ "${STACKS[@]}" !="${OldWorkflowID}" ]]
             then
               echo "------------------ Deleted ----------------"
               aws s3 rm s3://udapeople-${OldWorkflowID} --recursive
