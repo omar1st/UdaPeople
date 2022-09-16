@@ -29,7 +29,7 @@ commands:
     parameters:
         workflow_id: ${CIRCLE_WORKFLOW_ID:0:7}
           type: string
-          #default: ${CIRCLE_WORKFLOW_ID:0:7}
+          default: ${CIRCLE_WORKFLOW_ID:0:7}
     steps:
       - run:
           name: Revert migrations
@@ -227,7 +227,9 @@ jobs:
             then
               echo "successfully migrated and sent to kvdb"
               curl https://kvdb.io/${KVDB_BUCKET}/migration_${CIRCLE_WORKFLOW_ID:0:7} -d '1'
-            fi 
+            fi
+      - attach_workspace:
+          at: ~/app
 
   deploy-frontend:
     docker:
