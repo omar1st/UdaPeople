@@ -240,6 +240,7 @@ jobs:
       - run:
           name: Install dependencies
           command: |
+            yum install -y tar gzip curl
             yum install epel-release
             yum install -y ansible
             yum install -y nodejs npm
