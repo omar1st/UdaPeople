@@ -240,10 +240,10 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            sudo yum install epel-release
-            sudo yum install -y ansible
-            sudo yum install -y nodejs npm
-            sudo yum install -y python
+            yum install epel-release
+            yum install -y ansible
+            yum install -y nodejs npm
+            yum install -y python
       - run:
           name: Get backend url
           command: |
