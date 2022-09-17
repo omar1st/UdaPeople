@@ -245,8 +245,7 @@ jobs:
             unzip -qq awscliv2.zip
             sudo ./aws/install
             sudo apt install -y ansible
-            sudo apt install -y nodejs 
-            sudo apt install -y npm
+            sudo apt install -y nodejs
             sudo apt install -y python
       - run:
           name: Get backend url
