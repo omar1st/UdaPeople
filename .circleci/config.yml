@@ -242,7 +242,7 @@ jobs:
           command: |
             sudo apt -install -y ansible
             sudo apt -install -y nodejs npm
-            sudo apt install -y tar gzip curl
+            sudo apt -install -y tar gzip curl
             curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
             unzip -qq awscliv2.zip
             sudo ./aws/install
@@ -286,7 +286,7 @@ jobs:
             apk add --update python curl
             curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
             unzip -qq awscliv2.zip
-            sudo ./aws/install 
+            ./aws/install 
       - run:
           name: Deploy backend
           command: |
