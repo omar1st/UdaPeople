@@ -240,6 +240,7 @@ jobs:
       - run:
           name: Install dependencies
           command: |
+            sudo yum install epel-release
             sudo yum install -y ansible
             sudo yum install -y nodejs npm
             sudo yum install -y python
