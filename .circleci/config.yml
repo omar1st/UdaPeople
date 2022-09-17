@@ -240,9 +240,9 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            yum install -y ansible
-            yum install -y nodejs npm
-            yum install -y python
+            sudo yum install -y ansible
+            sudo yum install -y nodejs npm
+            sudo yum install -y python
       - run:
           name: Get backend url
           command: |
