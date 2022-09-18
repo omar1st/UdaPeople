@@ -243,6 +243,8 @@ jobs:
             sudo apt install -y ansible
             sudo apt install -y nodejs
             sudo apt install -y python
+      - attach_workspace:
+          at: ~/
       - run:
           name: Get backend url
           command: |
