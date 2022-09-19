@@ -19,11 +19,12 @@
   shell: |
     cd ~/backend
     npm install
-
-- name:  start app
-  shell: 
     pm2 stop default
     pm2 start npm -- start
+
+#- name:  start app
+  #shell:
+    #pm2 start main.js
   args:
     chdir: ~/backend/dist
   environment:
