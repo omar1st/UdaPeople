@@ -23,8 +23,11 @@
     pm2 start npm -- start
   register: execute_node
 
-- name:  start app
-  command:  pm2 start main.js
+#- name:  start app
+  #shell:  
+    #npm install
+    #pm2 stop default
+    #pm2 start main.js
   args:
     chdir: ~/backend-app/dist
   environment:
