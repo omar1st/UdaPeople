@@ -278,8 +278,23 @@ jobs:
           name: Install dependencies
           command: |
             apk add --update ansible
+            apk add tar gzip
+            apk add zip
+      - run:
+          name: install awscli
+          command: |
+            apk add --no-cache \
+            python3 \
+            py3-pip \
+            && pip3 install --upgrade pip \
+            && pip3 install \
+            awscli \
+            && rm -rf /var/cache/apk/*
+      - run:
+          name: install node
+          command: |
             apk add --update nodejs npm
-            apk add --update tar gzip
+            apk add --update npm    
       - run:
           name: Deploy backend
           command: |

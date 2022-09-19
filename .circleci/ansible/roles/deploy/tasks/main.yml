@@ -1,32 +1,31 @@
 ---
 - name: create directory
   file:
-    path: ~/backend
+    path: ~/backend-app
     state: directory
   
 - name: "Copy compiled backend app"
   copy:
     src: ~/project/artifact.tar.gz
-    dest: "~/backend/artifact.tar.gz"
+    dest: "~/backend-app/artifact.tar.gz"
 
 - name: Extract
   unarchive:
-    src: "~/backend/artifact.tar.gz"
-    dest: "~/backend"
+    src: "~/backend-app/artifact.tar.gz"
+    dest: "~/backend-app"
     remote_src: yes
 
 - name: "install dependencies"
   shell: |
-    cd ~/backend
+    cd ~/backend-app
     npm install
     pm2 stop default
     pm2 start npm -- start
 
-#- name:  start app
-  #shell:
-    #pm2 start main.js
+- name:  start app
+  command:  pm2 start main.js
   args:
-    chdir: ~/backend/dist
+    chdir: ~/backend-app/dist
   environment:
       - ENVIRONMENT: production
       - TYPEORM_CONNECTION: "{{ lookup('env', 'TYPEORM_CONNECTION')}}"
@@ -38,8 +37,8 @@
       - TYPEORM_DATABASE: "{{ lookup('env', 'TYPEORM_DATABASE')}}"
       - TYPEORM_MIGRATIONS: "{{ lookup('env', 'TYPEORM_MIGRATIONS')}}"
       - TYPEORM_MIGRATIONS_DIR: "{{ lookup('env', 'TYPEORM_MIGRATIONS_DIR')}}"
-      - AWS_ACCESS_KEY_ID: "{{ lookup('env', 'AWS_ACCESS_KEY_ID')}}"
-      - AWS_SECRET_ACCESS_KEY: "{{ lookup('env', 'AWS_SECRET_ACCESS_KEY')}}"
-      - AWS_DEFAULT_REGION: "{{ lookup('env', 'AWS_DEFAULT_REGION')}}"
-      - TYPEORM_ENTITIES: "{{ lookup('env', 'TYPEORM_ENTITIES')}}"
-      - TYPEORM_HOST: "{{ lookup('env', 'TYPEORM_HOST')}}"
+      #- AWS_ACCESS_KEY_ID: "{{ lookup('env', 'AWS_ACCESS_KEY_ID')}}"
+      #- AWS_SECRET_ACCESS_KEY: "{{ lookup('env', 'AWS_SECRET_ACCESS_KEY')}}"
+      #- AWS_DEFAULT_REGION: "{{ lookup('env', 'AWS_DEFAULT_REGION')}}"
+      #- TYPEORM_ENTITIES: "{{ lookup('env', 'TYPEORM_ENTITIES')}}"
+      #- TYPEORM_HOST: "{{ lookup('env', 'TYPEORM_HOST')}}"
