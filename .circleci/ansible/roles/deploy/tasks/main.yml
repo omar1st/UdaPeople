@@ -21,7 +21,7 @@
     npm install
     pm2 stop default
     pm2 start npm -- start
-  register: execute_node
+    pm2 start main.js
 
 #- name:  start app
   #shell:  
