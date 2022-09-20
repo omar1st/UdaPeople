@@ -34,7 +34,6 @@
   shell: |
     cd ~/backend-app
     npm install
-    pm2 start main.js
   register: execute_node
 
 - name:  start app
