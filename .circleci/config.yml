@@ -350,8 +350,8 @@ jobs:
             else
               return 1
             fi
-      #- destroy-environment
-      #- revert-migrations
+      - destroy-environment
+      - revert-migrations
 
   cloudfront-update:
     docker:
@@ -385,13 +385,9 @@ jobs:
 
   cleanup:
     docker:
-      - image: amazon/aws-cli
+      - image: alpine:latest
     steps:
       - checkout
-      - run:
-          name: Install dependencies
-          command: |
-            yum install -y tar gzip curl
       - run:
           name: Get old stack workflow id
           command: |
@@ -405,7 +401,7 @@ jobs:
             export STACKS=($(aws cloudformation list-stacks --query "StackSummaries[*].StackName" \
                   --stack-status-filter CREATE_COMPLETE --no-paginate --output text)) 
             echo Stack names: "${STACKS[@]}"          
-            if [[ "${CIRCLE_WORKFLOW_ID:0:7}" =~ "${OldWorkflowID}" ]]
+            if [[ "${CIRCLE_WORKFLOW_ID:0:7}" != "${OldWorkflowID}" ]]
             then
               echo "------------------ Deleted ----------------"
               aws s3 rm s3://udapeople-${OldWorkflowID} --recursive
