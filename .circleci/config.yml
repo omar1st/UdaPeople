@@ -280,16 +280,16 @@ jobs:
             apk add --update ansible
             apk add tar gzip
             apk add zip
-      #- run:
-          #name: install awscli
-          #command: |
-            #apk add --no-cache \
-            #python3 \
-            #py3-pip \
-            #&& pip3 install --upgrade pip \
-            #&& pip3 install \
-            #awscli \
-            #&& rm -rf /var/cache/apk/*
+      - run:
+          name: install awscli
+          command: |
+            apk add --no-cache \
+            python3 \
+            py3-pip \
+            && pip3 install --upgrade pip \
+            && pip3 install \
+            awscli \
+            && rm -rf /var/cache/apk/*
       - run:
           name: install node
           command: |
@@ -320,9 +320,9 @@ jobs:
       - run:
           name: Install dependencies
           command: |
-            apk add --update ansible
+            apk add --update nodejs
             apk add --update npm
-            apk add --no-cache aws-cli
+            #apk add --no-cache aws-cli
       - run:
           name: Get backend url
           command: |
@@ -385,25 +385,24 @@ jobs:
 
   cleanup:
     docker:
-      - image: alpine:latest
+      - image: amazon/aws-cli
     steps:
       - checkout
-      - run:
-          name: Install dependencies
-          command: |
-            apk add --no-cache aws-cli
+      - run: yum install -y tar gzip
+      - attach_workspace:
+          at: ~/
       - run:
           name: Get old stack workflow id
           command: |
             # Fetch the Old workflow ID
             export OldWorkflowID=$(aws cloudformation \
-                  list-exports --query "Exports[?Name==\`WorkflowID\`].Value" \
-                  --no-paginate --output text)
+                list-exports --query "Exports[?Name==\`WorkflowID\`].Value" \
+                --no-paginate --output text)
             echo OldWorkflowID: "${OldWorkflowID}"
             echo CIRCLE_WORKFLOW_ID "${CIRCLE_WORKFLOW_ID:0:7}"
             # Fetch the stack names          
             export STACKS=$(aws cloudformation list-stacks --query "StackSummaries[*].StackName" \
-                  --stack-status-filter CREATE_COMPLETE --no-paginate --output text) 
+                --stack-status-filter CREATE_COMPLETE --no-paginate --output text) 
             echo Stack names: "${STACKS[@]}"          
             if [[ "${CIRCLE_WORKFLOW_ID:0:7}" =~ "${OldWorkflowID}" ]]
             then
