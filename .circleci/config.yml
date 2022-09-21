@@ -290,11 +290,11 @@ jobs:
             #&& pip3 install \
             #awscli \
             #&& rm -rf /var/cache/apk/*
-      - run:
-          name: install node
-          command: |
-            apk add --update nodejs npm
-            apk add --update npm    
+      #- run:
+          #name: install node
+          #command: |
+            #apk add --update nodejs npm
+            #apk add --update npm    
       - run:
           name: Deploy backend
           command: |
