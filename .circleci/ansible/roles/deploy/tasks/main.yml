@@ -30,16 +30,11 @@
     production: yes
     state: present
 
-- name: "install dependencies"
-  shell: |
-    cd ~/backend-app
+- name:  start app
+  command: |    
     npm install
     pm2 stop default
     pm2 start npm -- start
-  #register: execute_node
-
-- name:  start app
-  command:  pm2 start main.js    
   args:
     chdir: ~/backend-app/dist
   environment:
