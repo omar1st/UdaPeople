@@ -281,16 +281,6 @@ jobs:
             apk add tar gzip
             apk add zip
       - run:
-          name: install awscli
-          command: |
-            apk add --no-cache \
-            python3 \
-            py3-pip \
-            && pip3 install --upgrade pip \
-            && pip3 install \
-            awscli \
-            && rm -rf /var/cache/apk/*
-      - run:
           name: install node
           command: |
             apk add --update nodejs npm
@@ -320,7 +310,6 @@ jobs:
             apk add --update curl
             apk add --update nodejs
             apk add --update npm
-            apk add --no-cache aws-cli
       - run:
           name: Get backend url
           command: |
