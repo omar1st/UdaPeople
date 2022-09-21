@@ -316,12 +316,12 @@ jobs:
     docker:
       - image: amazon/aws-cli #alpine:latest
     steps:
-      - run:
-          name: Install dependencies
-          command: |
-            yum install -y curl
-            yum install -y nodejs
-            yum install -y npm
+      #- run:
+        #  name: Install dependencies
+          #command: |
+            #yum install -y curl
+            #yum install -y nodejs
+            #yum install -y npm
     
       - run:
           name: Get backend url
