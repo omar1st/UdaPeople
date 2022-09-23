@@ -11,7 +11,7 @@
 
 - name: Extract
   unarchive:
-    src: "~/backend-app/artifact.tar.gz"
+    src: "~/backend/artifact.tar.gz"
     dest: "~/backend"
     remote_src: yes
 
@@ -36,7 +36,7 @@
     pm2 stop default
     pm2 start npm -- start
   args:
-    chdir: ~/backend-app/dist
+    chdir: ~/backend/dist
   environment:
       - ENVIRONMENT: production
       - TYPEORM_CONNECTION: "{{ lookup('env', 'TYPEORM_CONNECTION')}}"
